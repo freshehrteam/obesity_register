@@ -1,0 +1,157 @@
+﻿archetype (adl_version=1.4; uid=dd3c26ae-1907-480f-af5e-8d7ee950dd7a)
+	openEHR-EHR-CLUSTER.housing.v0
+
+concept
+	[at0000]	-- Housing
+language
+	original_language = <[ISO_639-1::en]>
+	translations = <
+		["nb"] = <
+			language = <[ISO_639-1::nb]>
+			author = <
+				["name"] = <"Silje Ljosland Bakke / John Tore Valand">
+				["organisation"] = <"Nasjonal IKT HF / Helse Bergen HF">
+			>
+		>
+	>
+description
+	original_author = <
+		["name"] = <"Heather Leslie">
+		["organisation"] = <"Ocean Informatics">
+		["email"] = <"heather.leslie@oceaninformatics.com">
+		["date"] = <"2013-03-01">
+	>
+	details = <
+		["en"] = <
+			language = <[ISO_639-1::en]>
+			purpose = <"To record a description of the housing or accomodation in which the subject resides to support decision-making for clinical management and provision of additional health services.">
+			use = <"Use to record a description of the housing or accomodation in which the subject resides to support decision-making for clinical management and provision of additional health services.
+
+Specifically designed to be used within the EVALUATION.social_summary archetype, but may be used within any clinically appropriate ENTRY or CLUSTER archetype related to recording social context.">
+			keywords = <"housing", "accommodation", "residential care", "home", "house", "apartment", "homeless", "rent", "owner">
+			misuse = <"Not to be used to record details about features of the home environment, such as whether there's a refrigerator or if there are several floors with no elevator - use the CLUSTER.home_environment archetype for this purpose.
+
+Not to be used to record details about the household, such as whether the individual lives alone or with others, or has dependents at home - use the CLUSTER.household archetype for this purpose.">
+			copyright = <"© National E-Health Transition Authority, openEHR Foundation, Nasjonal IKT HF">
+		>
+		["nb"] = <
+			language = <[ISO_639-1::nb]>
+			purpose = <"For å registrere individets bolig eller bosted for å støtte kliniske beslutningsprosesser og tildeling av helsetjenester.">
+			use = <"Brukes for å registrere individets bolig eller bosted for å støtte kliniske beslutningsprosesser og tildeling av helsetjenester.
+
+Arketypen er spesifikt utviklet for bruk i arketypen EVALUATION.social_summary (Sosialanamnese), men kan brukes i alle klinisk relevante ENTRY- eller CLUSTER-arketyper for å registrere sosial kontekst.
+">
+			keywords = <"bolig", "aldersbolig", "hjem", "hjemmesituasjon", "sykehjem", "hjemmesykepleie", "omsorgsbolig", "etasje", "tilrettelegging", "husleie">
+			misuse = <"Arketypen brukes ikke for å registrere spesifikke egenskaper ved hjemmeomgivelsene, for eksempel om det finnes kjøleskap eller om boligen har flere etasjer uten heis. Bruk arketypen CLUSTER.home_environment for dette formålet.
+
+Brukes ikke for å registrere detaljer om individets husholdning, for eksempel om individet bor alene, med andre eller har forsørgeransvar. Bruk arketypen CLUSTER.household for dette formålet.">
+			copyright = <"*© National E-Health Transition Authority(en)">
+		>
+	>
+	lifecycle_state = <"in_development">
+	other_contributors = <"Silje Ljosland Bakke, Nasjonal IKT HF, Norway (openEHR Editor)", "John Tore Valand, Helse Bergen HF, Norway", "Heather Leslie, Ocean Informatics, Australia (openEHR Editor)", "Ian McNicoll, freshEHR Clinical Informatics, United Kingdom (openEHR Editor)">
+	other_details = <
+		["references"] = <"Derived from: Housing, Draft Archetype [Internet]. nehta, Australia, nehta Clinical Knowledge Manager [cited: 2016-03-07]. Available from: http://dcm.nehta.org.au/ckm/#showArchetype_1013.1.1211
+
+METeOR (Metadata Online Registry) [Internet]. Australia: Australian Institute of Health and Welfare. Person—accommodation type (usual). Available from: http://meteor.aihw.gov.au/content/index.phtml/itemId/270088 (accessed 2013 Mar 01).">
+		["current_contact"] = <"Heather Leslie, Ocean Informatics, heather.leslie@oceaninformatics.com">
+		["MD5-CAM-1.0.1"] = <"84186E3E60F7BA7FA5B3BB4B5BC60A46">
+		["build_uid"] = <"f569b287-01b9-445d-b5b4-0e13453206a5">
+		["revision"] = <"0.0.1-alpha">
+	>
+
+definition
+	CLUSTER[at0000] matches {	-- Housing
+		items cardinality matches {1..*; unordered} matches {
+			ELEMENT[at0002] occurrences matches {0..*} matches {	-- Housing
+				value matches {
+					DV_TEXT matches {*}
+				}
+			}
+			ELEMENT[at0004] occurrences matches {0..1} matches {	-- Description
+				value matches {
+					DV_TEXT matches {*}
+				}
+			}
+			ELEMENT[at0003] occurrences matches {0..1} matches {	-- Tenure
+				value matches {
+					DV_TEXT matches {*}
+				}
+			}
+			allow_archetype CLUSTER[at0006] occurrences matches {0..*} matches {	-- Detail
+				include
+					archetype_id/value matches {/.*/}
+			}
+			ELEMENT[at0016] occurrences matches {0..1} matches {	-- Comment
+				value matches {
+					DV_TEXT matches {*}
+				}
+			}
+		}
+	}
+
+
+ontology
+	term_definitions = <
+		["en"] = <
+			items = <
+				["at0000"] = <
+					text = <"Housing">
+					description = <"Description of the housing or accomodation in which the subject resides.">
+				>
+				["at0002"] = <
+					text = <"Housing">
+					description = <"Type of housing or accommodation where the individual usually resides.">
+					comment = <"Coding with a terminology is desirable, where possible. For example: a flat or apartment, caravan, nursing home, transient, or homeless.">
+				>
+				["at0003"] = <
+					text = <"Tenure">
+					description = <"The type of legal right to occupy a dwelling, for example, owner or renter.">
+				>
+				["at0004"] = <
+					text = <"Description">
+					description = <"Description of the housing or accommodation.">
+				>
+				["at0006"] = <
+					text = <"Detail">
+					description = <"Additional details about housing.">
+					comment = <"For example: disability aids installed; number of stairs; or availability of refrigerator in which to store medications.">
+				>
+				["at0016"] = <
+					text = <"Comment">
+					description = <"Additional comment about the housing or accommodation not covered in other fields.">
+				>
+			>
+		>
+		["nb"] = <
+			items = <
+				["at0000"] = <
+					text = <"Husvære">
+					description = <"Beskrivelse av individets bolig eller bosted.">
+				>
+				["at0002"] = <
+					text = <"Husvære">
+					description = <"Type bolig eller bosted hvor individet vanligvis bor.">
+					comment = <"Koding med en terminologi er ønskelig, om mulig. For eksempel: Leilighet, campingvogn, sykehjem, omreisende eller hjemløs.">
+				>
+				["at0003"] = <
+					text = <"Eierskap">
+					description = <"Individets juridiske rett til å benytte boligen, f.eks. selveier eller leier.">
+					comment = <"For eksempel: Leietager eller boligeier.">
+				>
+				["at0004"] = <
+					text = <"Beskrivelse">
+					description = <"Ytterligere beskrivelse av bolig eller bosted.">
+				>
+				["at0006"] = <
+					text = <"Detaljer">
+					description = <"Ytterligere detaljer om boligen.">
+					comment = <"For eksempel: Installerte bevegelseshjelpemidler, antall trapper, eller om det er kjøleskap tilgjengelig for å lagre legemidler.">
+				>
+				["at0016"] = <
+					text = <"Kommentar">
+					description = <"Ytterligere fritekst om bolig eller bosted som ikke er dekket i andre felt.">
+				>
+			>
+		>
+	>
